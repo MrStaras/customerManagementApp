@@ -1,0 +1,14 @@
+html body{
+    background-color: #010C23;
+    font-family: Arial, sans-serif; 
+}
+
+.login-form{
+    width: 400px;
+    height: 450px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #2B4559;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
