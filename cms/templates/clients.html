@@ -9,7 +9,7 @@
 
     <aside class="sidebar">
         <div class="logo-area">
-            <img src="{{ url_for('static', filename='images/ConsultPro.png') }}"  alt="ConsultPro Logo" class="sidebar-logo">
+            <img src="{{ url_for('static', filename='images/ConsultPro_Client.png') }}"  alt="ConsultPro Logo" class="sidebar-logo">
         </div>
         <nav class="sidebar-nav">
             <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
@@ -22,7 +22,9 @@
     <main class="main-content">
         <header class="page-header">
             <h1>Clients</h1>
-            <button class="btn-add" onclick="openModal()">Add Client</button>
+            {% if current_user.role == 'Administrator' %}
+                <button class="btn-add" onclick="openModal()">Add Client</button>
+            {% endif %}
         </header>
 
         <div class="table-container">
@@ -42,14 +44,26 @@
                         <td class="client-name">{{ client.name }}</td>
                         <td>{{ client.contact_info }}</td> <td>{{ client.company }}</td>
                         <td>
-                            <span class="status-badge {{ client.status.lower() }}">
-                                {{ client.status }}
-                            </span>
+                            {% if current_user.role == 'Administrator' %}
+                                <a href="{{ url_for('main.toggle_status', client_id=client.id) }}" style="text-decoration: none;">
+                                    <span class="status-badge {{ client.status.lower() }}">
+                                        {{ client.status }}
+                                    </span>
+                                </a>
+                            {% else %}
+                                <span class="status-badge {{ client.status.lower() }}">
+                                    {{ client.status }}
+                                </span>
+                            {% endif %}
                         </td>
                         <td class="actions">
-                            <a href="#" class="btn-edit">Edit</a>
-                            <span class="divider">|</span>
-                            <a href="#" class="btn-delete">Delete</a>
+                            {% if current_user.role == 'Administrator' %}
+                                <a href="#" class="btn-edit">Edit</a>
+                                <span class="divider">|</span>
+                                <a href="#" class="btn-delete">Delete</a>
+                            {% else %}
+                                <span class="text-muted" style="color: #999; font-size: 0.9em;">View Only</span>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -58,6 +72,7 @@
         </div>
     </main>
 
+    {% if current_user.role == 'Administrator' %}
     <div id="clientModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -65,7 +80,7 @@
             
             <form method="POST" action="{{ url_for('main.clients') }}">
                 <label>Name</label>
-                <input type="text" name="name" required placeholder="e.g. John Doe">
+                <input type="text" name="name" required placeholder="e.g. Steve Jobs">
                 
                 <label>Contact Email</label>
                 <input type="email" name="contact" required placeholder="name@company.com">
@@ -83,25 +98,16 @@
             </form>
         </div>
     </div>
+    {% endif %}
 
     <script>
-        // Get the modal element
+        // Modal Logic (Only runs if the modal exists)
         var modal = document.getElementById("clientModal");
-
-        // Function to open the modal
-        function openModal() {
-            modal.style.display = "block";
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        // Close modal if user clicks outside the box
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+        if (modal) {
+            function openModal() { modal.style.display = "block"; }
+            function closeModal() { modal.style.display = "none"; }
+            window.onclick = function(event) {
+                if (event.target == modal) { modal.style.display = "none"; }
             }
         }
     </script>

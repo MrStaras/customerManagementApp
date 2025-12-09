@@ -1,0 +1,2 @@
+FLASK_APP=cms
+FLASK_DEBUG=1

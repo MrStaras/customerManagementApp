@@ -25,6 +25,8 @@ class Client(db.Model):
     name = db.Column(db.String(100), nullable=False)
     contact_info = db.Column(db.String(200))
     assigned_consultant = db.Column(db.String(100))
+    company = db.Column(db.String(100))
+    status = db.Column(db.String(50), default='Active')
     # Relationship to Projects
     projects = db.relationship('Project', backref='client', lazy=True)
 
