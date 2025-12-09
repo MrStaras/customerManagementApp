@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required
-from models import User # To check if user exists
+from .models import User # To check if user exists
 
 #1. Create Blueprint for authentication
 auth_bp = Blueprint('auth', __name__)

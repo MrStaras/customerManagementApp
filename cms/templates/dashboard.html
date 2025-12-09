@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConsultPro Dashboard</title>
-     <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 </head>
 <body>
 
@@ -12,7 +12,7 @@
         <div class="navbar-brand">ConsultPro Dashboard</div>
         <nav class="navbar-links">
             <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
-            <a href="#">Clients</a>
+            <a href="{{ url_for('main.clients') }}">Clients</a>
             <a href="#">Projects</a>
             <a href="#">Tasks</a>
             {% if current_user.role == 'Administrator' %}

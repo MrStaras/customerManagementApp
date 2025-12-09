@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients - ConsultPro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='clients.css') }}">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='images/ConsultPro.png') }}"  alt="ConsultPro Logo" class="sidebar-logo">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.clients') }}" class="active">Clients</a>
+            <a href="#">Projects</a>
+            <a href="#">Tasks</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Clients</h1>
+            <button class="btn-add" onclick="openModal()">Add Client</button>
+        </header>
+
+        <div class="table-container">
+            <table class="clients-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Company</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td class="client-name">{{ client.name }}</td>
+                        <td>{{ client.contact_info }}</td> <td>{{ client.company }}</td>
+                        <td>
+                            <span class="status-badge {{ client.status.lower() }}">
+                                {{ client.status }}
+                            </span>
+                        </td>
+                        <td class="actions">
+                            <a href="#" class="btn-edit">Edit</a>
+                            <span class="divider">|</span>
+                            <a href="#" class="btn-delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Client</h2>
+            
+            <form method="POST" action="{{ url_for('main.clients') }}">
+                <label>Name</label>
+                <input type="text" name="name" required placeholder="e.g. John Doe">
+                
+                <label>Contact Email</label>
+                <input type="email" name="contact" required placeholder="name@company.com">
+                
+                <label>Company</label>
+                <input type="text" name="company" required placeholder="Company Name">
+
+                <label>Status</label>
+                <select name="status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+
+                <button type="submit" class="btn-submit">Save Client</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal element
+        var modal = document.getElementById("clientModal");
+
+        // Function to open the modal
+        function openModal() {
+            modal.style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close modal if user clicks outside the box
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

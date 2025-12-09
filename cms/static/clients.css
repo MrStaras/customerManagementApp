@@ -1,0 +1,207 @@
+/* --- LAYOUT & RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #0B1937; /* Deep Dark Blue Background */
+    color: #FFFFFF;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 250px;
+    background-color: #010C23; /* Matches Body BG */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-right: 1px solid #1F2A38; /* Subtle separator */
+}
+
+.logo-area {
+    margin-bottom: 40px;
+}
+
+.sidebar-logo {
+    width: 140px;
+    border-radius: 4px;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: #B0B0B0;
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.sidebar-nav a:hover {
+    color: #FFFFFF;
+    background-color: #1F2A38;
+}
+
+.sidebar-nav a.active {
+    background-color: #001f3f; /* Darker Highlight for Active */
+    color: #00CFFF; /* Cyan Text */
+    border-left: 3px solid #00CFFF;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+/* Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.btn-add {
+    background-color: #007BFF; /* Bright Blue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-add:hover {
+    background-color: #0056b3;
+}
+
+/* --- TABLE STYLING --- */
+.table-container {
+    width: 100%;
+}
+
+.clients-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Space between rows */
+}
+
+.clients-table th {
+    text-align: left;
+    color: #00CFFF;
+    font-size: 14px;
+    padding: 10px 20px;
+}
+
+.clients-table tbody tr {
+    background-color: #0d1b2a; /* Very dark row background */
+    /* Or use #1F2A38 if you want lighter cards */
+}
+
+.clients-table td {
+    padding: 20px;
+    font-size: 15px;
+}
+
+/* First and Last cells rounded corners */
+.clients-table td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.clients-table td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* --- BADGES & ACTIONS --- */
+.status-badge {
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+
+.status-badge.active {
+    background-color: #007BFF; /* Blue */
+    color: white;
+}
+
+.status-badge.inactive {
+    background-color: #34495E; /* Grey */
+    color: #B0B0B0;
+}
+
+.actions {
+    font-weight: bold;
+}
+
+.btn-edit {
+    color: #2ECC71; /* Green */
+    text-decoration: none;
+}
+
+.btn-delete {
+    color: #E74C3C; /* Red */
+    text-decoration: none;
+}
+
+.divider {
+    color: #FFFFFF;
+    margin: 0 5px;
+    opacity: 0.5;
+}
+
+/* --- MODAL STYLES --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #1F2A38;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #4601a1f7;
+    width: 400px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    color: #aaa; float: right; font-size: 28px; cursor: pointer;
+}
+.close:hover { color: white; }
+
+.modal-content h2 { color: #00CFFF; margin-bottom: 20px; }
+.modal-content label { display: block; margin-top: 10px; color: #BDC3C7; }
+
+.modal-content input, .modal-content select {
+    width: 100%; padding: 10px; margin-top: 5px;
+    background-color: #374A5A; border: 1px solid #4601a1f7;
+    color: white; border-radius: 4px;
+}
+
+.btn-submit {
+    width: 100%; padding: 12px; margin-top: 20px;
+    background-color: #00CFFF; border: none; font-weight: bold; cursor: pointer;
+}
