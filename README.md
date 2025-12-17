@@ -1,7 +1,3 @@
-Here is the simplified **README.md**. I have condensed the installation step into a single command line for you.
-
----
-
 # ConsultPro
 
 A lightweight Client Management System built with Python and Flask.
