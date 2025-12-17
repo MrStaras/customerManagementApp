@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='analytics.css') }}">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='images/ConsultPro_Client.png') }}" class="sidebar-logo">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.clients') }}">Clients</a>
+            <a href="{{ url_for('main.projects') }}">Projects</a>
+            <a href="{{ url_for('main.tasks') }}">Tasks</a>
+            <a href="{{ url_for('main.analytics') }}" class="active">Analytics</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <h1>Company Analytics</h1>
+        <br>
+        <div class="stats-container">
+            <div class="stat-box">
+                <h2>Total Revenue</h2>
+                <p class="big-text">{{ data.total_revenue }}</p>
+            </div>
+            <div class="stat-box">
+                <h2>Yearly Growth</h2>
+                <p class="big-text" style="color: #2ECC71;">{{ data.growth }}</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Monthly Performance</h3>
+            <div class="bar" style="width: 60%;"><span>Jan</span></div>
+            <div class="bar" style="width: 80%;"><span>Feb</span></div>
+            <div class="bar" style="width: 45%;"><span>Mar</span></div>
+            <div class="bar" style="width: 90%;"><span>Apr</span></div>
+        </div>
+    </main>
+</body>
+</html>

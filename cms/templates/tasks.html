@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks - ConsultPro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='tasks.css') }}">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='images/ConsultPro_Client.png') }}" class="sidebar-logo">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.clients') }}">Clients</a>
+            <a href="{{ url_for('main.projects') }}">Projects</a>
+            <a href="{{ url_for('main.tasks') }}" class="active">Tasks</a>
+            <a href="{{ url_for('main.analytics') }}">Analytics</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Tasks</h1>
+            {% if current_user.role == 'Administrator' %}
+                <button class="btn-add">Add Task</button>
+            {% endif %}
+        </header>
+
+        <div class="table-container">
+            <table class="clients-table">
+                <thead>
+                    <tr>
+                        <th>Task Title</th>
+                        <th>Related Project</th>
+                        <th>Assigned To</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td style="font-weight:bold; color:white;">{{ task.title }}</td>
+                        <td>{{ task.project }}</td>
+                        <td>{{ task.assignee }}</td>
+                        <td>
+                            {% if task.status == 'Done' %}
+                                <span class="status-badge active">Done</span>
+                            {% else %}
+                                <span class="status-badge pending">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td class="actions">
+                            {% if current_user.role == 'Administrator' %}
+                                <a href="#" class="btn-edit">Edit</a>
+                            {% else %}
+                                <span style="color: #999; font-size: 0.9em; font-weight: normal;">View Only</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

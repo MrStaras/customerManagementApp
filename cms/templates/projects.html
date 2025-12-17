@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects - ConsultPro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='projects.css') }}">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='images/ConsultPro_Client.png') }}" class="sidebar-logo">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.clients') }}">Clients</a>
+            <a href="{{ url_for('main.projects') }}" class="active">Projects</a>
+            <a href="{{ url_for('main.tasks') }}">Tasks</a>
+            <a href="{{ url_for('main.analytics') }}">Analytics</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Projects</h1>
+            {% if current_user.role == 'Administrator' %}
+                <button class="btn-add">New Project</button>
+            {% endif %}
+        </header>
+
+        <div class="table-container">
+            <table class="clients-table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Client</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                    <tr>
+                        <td style="font-weight:bold; color:white;">{{ project.name }}</td>
+                        <td>{{ project.client }}</td>
+                        <td>{{ project.deadline }}</td>
+                        <td>
+                            {% if project.status == 'Completed' %}
+                                <span class="status-badge active">Completed</span>
+                            {% elif project.status == 'In Progress' %}
+                                <span class="status-badge progress">In Progress</span>
+                            {% else %}
+                                <span class="status-badge inactive">{{ project.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="actions">
+                            {% if current_user.role == 'Administrator' %}
+                                <a href="#" class="btn-edit">Edit</a>
+                                <span class="divider">|</span>
+                                <a href="#" class="btn-delete">Delete</a>
+                            {% else %}
+                                <span style="color: #999; font-size: 0.9em; font-weight: normal;">View Only</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
