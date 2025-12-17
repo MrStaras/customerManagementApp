@@ -17,13 +17,17 @@ A lightweight Client Management System built with Python and Flask.
 
 ## How to Run
 
-**1. Install Dependencies**
-Run this command in your terminal:
+**1. Clone the Repository**
+Run this command:
+`git clone https://github.com/MrStaras/customerManagementApp`
+
+**2. Install Dependencies**
+Run this command:
 `pip install Flask Flask-Login Flask-SQLAlchemy python-dotenv`
 
-**2. Start the Application**
+**3. Start the Application**
 Run this command:
-`flask --app cms run`
+`python run.py`
 
-**3. Open in Browser**
+**4. Open in Browser**
 Go to: `http://127.0.0.1:5000/`
